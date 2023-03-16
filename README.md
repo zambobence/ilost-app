@@ -24,13 +24,13 @@ Pwd: testtest
 
 ### Technologies used
 The application is built with ReactJS.
-In this application I have used the GoogleMaps API with [React Google Maps]('https://tomchentw.github.io/react-google-maps/') library to embed a Map which shows users location on the map, enables them to pinpoint a location , and also to display the matched items. With [GoogleMaps Places Autocomplete]('https://developers.google.com/maps/documentation/javascript/place-autocomplete') they can also look for a specific location they would like to pinpoint.
+In this application I have used the GoogleMaps API with [React Google Maps](https://tomchentw.github.io/react-google-maps/) library to embed a Map which shows users location on the map, enables them to pinpoint a location , and also to display the matched items. With [GoogleMaps Places Autocomplete](https://developers.google.com/maps/documentation/javascript/place-autocomplete) they can also look for a specific location they would like to pinpoint.
 
-The user's current location in coordinates retrieved using the [Geolocation API]('https://developer.mozilla.org/en-US/docs/Web/API/Geolocation_API') which afterwards fetches the place data from [Google Maps Places API]('https://developers.google.com/maps/documentation/places/web-service/details') .
+The user's current location in coordinates retrieved using the [Geolocation API](https://developer.mozilla.org/en-US/docs/Web/API/Geolocation_API) which afterwards fetches the place data from [Google Maps Places API](https://developers.google.com/maps/documentation/places/web-service/details) .
 
-[Firebase]('https://firebase.google.com/') is serving as a backend for the application, as for authentication, storing user and item data, and also fetching and posting it to the NoSQL database.
+[Firebase](https://firebase.google.com/) is serving as a backend for the application, as for authentication, storing user and item data, and also fetching and posting it to the NoSQL database.
 
-I have used [React Router]('https://reactrouter.com/en/main') for routing and the React Context API to hold and provide the userdata and authentication data for the application.
+I have used [React Router](https://reactrouter.com/en/main) for routing and the React Context API to hold and provide the userdata and authentication data for the application.
 
 ### Screenshots
 
