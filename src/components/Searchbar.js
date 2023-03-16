@@ -1,18 +1,20 @@
 import React, { useState } from 'react'
 import { createPlaceObj } from '../functions/createPlaceObj'
 import { LoadScript, Autocomplete } from '@react-google-maps/api'
+const apiKey = process.env.REACT_APP_API_KEY
 
 export default function Searchbar({
 	setCoordinates,
-	getUserLocation,
+	getCurrentLocation,
 	setPlaceData,
-}) {
+	}) {
 	const [searchResult, setSearchResult] = useState('Result: none')
+    const [ libraries ] = useState(['places']);
+
 	const onLoad = (autocomplete) => {
 		setSearchResult(autocomplete)
 	}
 
-	const apiKey = process.env.REACT_APP_API_KEY
 	const onPlaceChanged = () => {
 		if (searchResult !== null) {
 
@@ -28,17 +30,17 @@ export default function Searchbar({
 	}
 
 	return (
-		<div className='searchbar-container'>
-			<LoadScript googleMapsApiKey={apiKey} libraries={['places']}>
+		<div className='searchbar-container container'>
+			<LoadScript googleMapsApiKey={apiKey} libraries={libraries}>
 				<Autocomplete
-					className='searchbar'
+					className='searchbar-autocomplete'
 					onPlaceChanged={onPlaceChanged}
 					onLoad={onLoad}
 				>
-					<input className='searchbar-autoinput-field' type='text' />
+					<input className='searchbar-autocomplete-field' type='text' />
 				</Autocomplete>
 			</LoadScript>
-			<span className='searchbar-icon' onClick={getUserLocation}>
+			<span className='searchbar-icon' onClick={getCurrentLocation}>
 				<i
 				className='icon fa-solid searchbar-icon fa-location-arrow'
 				

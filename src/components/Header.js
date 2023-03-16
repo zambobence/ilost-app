@@ -1,8 +1,6 @@
 import React, { useContext, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { AuthContext } from '../context/AuthContext'
-import SideBar from './SideBar'
-import './Header.css'
 function Header({ handleSignout, clearCriteria }) {
 	const [openSideBar, setOpenSideBar] = useState(false)
 
@@ -20,12 +18,7 @@ function Header({ handleSignout, clearCriteria }) {
 					<p>iLost</p>
 				</div>
 			</header>
-			<SideBar
-				clearCriteria={clearCriteria}
-				setOpenSideBar={setOpenSideBar}
-				openSideBar={openSideBar}
-				handleSignout={handleSignout}
-			/>
+			
 		</>
 	)
 }

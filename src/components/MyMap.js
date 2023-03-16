@@ -17,15 +17,6 @@ import walletIcon from '../img/icons/walletIcon.png'
 import etcIcon from '../img/icons/etcIcon.png'
 import currentLocationPin from '../img/icons/currentLocationPin.png'
 
-const apiKey = process.env.REACT_APP_API_KEY
-const containerStyle = {
-	width: '100%',
-	height: '100%',
-	position: 'relative',
-}
-
-const browseMode = true
-
 const markerObj = {
 	phone: phoneIcon,
 	clothes: clothesIcon,
@@ -35,8 +26,18 @@ const markerObj = {
 	etc: etcIcon,
 }
 
+const apiKey = process.env.REACT_APP_API_KEY
+const containerStyle = {
+	width: '100%',
+	height: '100%',
+	position: 'relative',
+}
+
+const browseMode = true
+
+
+
 function MyMap({ coordinates, setCoordinates, items, radius, setPlaceData }) {
-	const [autoInput, setAutoInput] = useState('')
 
 	const lostOptions = {
 		strokeColor: '#ff0000',
@@ -89,10 +90,7 @@ function MyMap({ coordinates, setCoordinates, items, radius, setPlaceData }) {
 					}}
 				>
 					<>
-						<Marker
-							icon={currentLocationPin}
-							position={coordinates}
-						/>
+						<Marker position={coordinates} icon={currentLocationPin}/>
 						<Circle
 							center={coordinates}
 							radius={radius}
