@@ -11,7 +11,6 @@ function Login() {
 	const dataretrieved = useContext(UserDataContext)
 
 	const navigate = useNavigate()
-	const { userData } = useContext(UserDataContext)
 
 	const handleLogin = async (e) => {
 		e.preventDefault()
@@ -30,7 +29,7 @@ function Login() {
 		}
 	}
 	return (
-		<div className='login-container'>
+		<div className='container grid'>
 			<form className='form-container' onSubmit={handleLogin}>
 				<h2 className='form-container-headline'>Login to post an item you have found or lost.</h2>
 				<input
@@ -55,13 +54,7 @@ function Login() {
 				</h4>
 				<button className='btn'>Login</button>
 			</form>
-			<div className='placeholder-img-container'>
-				<img
-					src='https://images.unsplash.com/photo-1601972599748-19fe5a7e756f?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1113&q=80'
-					className='placeholder-img'
-					alt='placeholder img for desktop'
-				/>
-			</div>
+			
 		</div>
 	)
 }

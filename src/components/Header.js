@@ -2,20 +2,30 @@ import React, { useContext, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { AuthContext } from '../context/AuthContext'
 function Header({ handleSignout, clearCriteria }) {
-	const [openSideBar, setOpenSideBar] = useState(false)
 
-	const toggleSideBar = () => {
-		setOpenSideBar((prevState) => !prevState)
-	}
+	const { authUser } = useContext(AuthContext)
+	const currentUser = authUser?.uid
 	return (
 		<>
 			<header className='Header'>
 				<div className='container'>
-					<i
-						className='fa-solid fa-bars menu-toggler'
-						onClick={toggleSideBar}
-					></i>
-					<p>iLost</p>
+					<nav>
+						<ul>
+							<li><Link to="/">Home</Link></li>
+							<li><Link to="/browse">Browse</Link></li>
+							{currentUser ?
+							<>
+								<li><Link to="/additem">Add Item</Link></li>
+								<li><Link to="/profile">Profile</Link></li>
+								<li><Link to="/signin" onClick={handleSignout}>Signout</Link></li>
+							</>
+							: <>
+							<li><Link to="/login">Login</Link></li>
+							<li><Link to="/register">Register</Link></li>
+							</>
+						}
+						</ul>
+					</nav>
 				</div>
 			</header>
 			

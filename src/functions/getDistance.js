@@ -1,4 +1,4 @@
-export default function getDistance(pointA, pointB) {
+export function calculateDistance(pointA, pointB) {
 	const lat1 = pointA.lat
 	const lon1 = pointA.lng
 	const lat2 = pointB.lat

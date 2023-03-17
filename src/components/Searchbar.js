@@ -30,7 +30,7 @@ export default function Searchbar({
 	}
 
 	return (
-		<div className='searchbar-container container'>
+		<div className='searchbar-container'>
 			<LoadScript googleMapsApiKey={apiKey} libraries={libraries}>
 				<Autocomplete
 					className='searchbar-autocomplete'
@@ -42,9 +42,7 @@ export default function Searchbar({
 			</LoadScript>
 			<span className='searchbar-icon' onClick={getCurrentLocation}>
 				<i
-				className='icon fa-solid searchbar-icon fa-location-arrow'
-				
-			></i>
+				className='icon fa-solid searchbar-icon fa-location-arrow'></i>
 			</span>
 		</div>
 	)

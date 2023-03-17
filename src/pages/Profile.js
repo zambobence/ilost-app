@@ -47,7 +47,7 @@ function Profile({ handleSignout }) {
 	}, [file])
 
 	return (
-		<div className='profile-container'>
+		<div className='container grid'>
 			{isLoading && <LoadingComponent loadingText={'Uploading image...'} />}
 			<div className='form-container'>
 				<div className='profile-picture-container'>

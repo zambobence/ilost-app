@@ -74,7 +74,8 @@ a {
 
 .form-container,
 .map-container,
-.searchbar-container {
+.searchbar-container,
+.col {
 	grid-column: 1 / -1;
 }
 
@@ -90,6 +91,10 @@ a {
 	justify-content: space-between;
 }
 
+.searchbar-container > div:first-of-type {
+	display: none;
+}
+
 .searchbar-autocomplete {
 	flex-basis: 90%;
 	margin-right: auto;
@@ -97,7 +102,7 @@ a {
 
 .searchbar-autocomplete-field {
 	display: inline-block;
-	width: 100%;
+	width: 90%;
 }
 
 .form-container {
@@ -138,6 +143,7 @@ input, select, textarea {
 .input-cont input[type="range"] {
 	flex-basis: 50%;
 	width: 50%;
+	margin-right: auto;
 }
 
 
@@ -154,4 +160,27 @@ input, select, textarea {
 
 .location {
 	padding: 0 0 .5rem;
+}
+
+
+img {
+	display: block;
+	max-height: 30vh;
+	object-fit: cover;
+	width: 100%;
+	max-width: 600px;
+}
+
+@media (min-width: 800px) {
+	.form-container,
+	.map-container,
+	.searchbar-container,
+	.col {
+		grid-column: span 6 ;
+	}
+
+	.map-container {
+		height: 90vh;
+	}
+
 }

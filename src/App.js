@@ -7,6 +7,7 @@ import AddUI from './pages/AddUI'
 import Register from './pages/Register'
 import Login from './pages/Login'
 import Profile from './pages/Profile'
+import ItemPage from './pages/ItemPage'
 import { auth } from './firebase'
 import { UserDataContext } from './context/UserDataContext'
 import { signOut } from 'firebase/auth'
@@ -69,6 +70,7 @@ function App() {
 							</RequireAuth>
 						}
 					/>
+					<Route path='item/:id' element={<ItemPage />} />
 					<Route path='/register' element={<Register />} />
 					<Route path='/login' element={<Login />} />
 					<Route path='*' element={<Navigate to='/' />} />					

@@ -5,9 +5,22 @@ import {
 	GoogleMap,
 	LoadScript,
 } from '@react-google-maps/api'
-import currentLocationPin from '../img/icons/currentLocationPin.png'
 import { fetchPlaceDetails } from '../functions/fetchPlaceDetails'
 import { ItemDataContext } from '../context/ItemDataContext'
+
+import phoneIcon from '../img/icons/phoneIcon.png'
+import clothesIcon from '../img/icons/clothesIcon.png'
+import laptopIcon from '../img/icons/laptopIcon.png'
+import keyIcon from '../img/icons/keyIcon.png'
+import walletIcon from '../img/icons/walletIcon.png'
+import etcIcon from '../img/icons/etcIcon.png'
+import currentLocationPin from '../img/icons/currentLocationPin.png'
+
+
+function MapComponent({coordinates, setCoordinates, setPlaceData, itemRadius, itemsToDisplay, browseMode}) {
+    const {radius} = useContext(ItemDataContext)
+	const [ libraries ] = useState(['places']);
+	const apiKey = process.env.REACT_APP_API_KEY
 
 const containerStyle = {
 	width: '100%',
@@ -15,10 +28,6 @@ const containerStyle = {
 	position: 'relative',
 }
 
-
-
-function MapComponent({coordinates, setCoordinates, setPlaceData}) {
-    const {radius} = useContext(ItemDataContext)
     
 	const currentLocationOptions = {
 		strokeColor: '#007ebd',
@@ -27,10 +36,49 @@ function MapComponent({coordinates, setCoordinates, setPlaceData}) {
 		fillColor: '#007ebd',
 		fillOpacity: 0.35,
 	}
-    const [ libraries ] = useState(['places']);
-	const apiKey = process.env.REACT_APP_API_KEY
-	
 
+	const lostCircleStyle = {
+		strokeColor: '#ff0000',
+		strokeOpacity: 0.8,
+		strokeWeight: 0.5,
+		fillColor: '#FF0000',
+		fillOpacity: 0.35,
+	}
+
+	const foundCircleStyle = {
+		strokeColor: '#1eff00',
+		strokeOpacity: 0.8,
+		strokeWeight: 0.5,
+		fillColor: '#1eff00;',
+		fillOpacity: 0.35,
+	}
+
+	const markerObj = {
+		phone: phoneIcon,
+		clothes: clothesIcon,
+		laptop: laptopIcon,
+		key: keyIcon,
+		wallet: walletIcon,
+		etc: etcIcon,
+	}
+
+
+    
+	
+	const MarkerArray = itemsToDisplay?.map((item, i) => (
+		<>
+			<Marker
+				icon={markerObj[item?.type]}
+				position={item.loc}
+			/>
+			<Circle
+				radius={item.radius}
+				center={item.loc}
+				options={
+					item.lost ? lostCircleStyle : foundCircleStyle
+				}
+			/>
+		</>))
 
 	return (
 		<div className='map-container'>
@@ -48,7 +96,6 @@ function MapComponent({coordinates, setCoordinates, setPlaceData}) {
 					center={coordinates}
 					zoom={12}
 					onClick={(e) => {
-						console.log('I am clicked, coordinates are: ')
 						setCoordinates({
 							lat: e.latLng.lat(),
 							lng: e.latLng.lng(),
@@ -59,13 +106,15 @@ function MapComponent({coordinates, setCoordinates, setPlaceData}) {
 					}}
 				>
 					<>
-						<Marker position={coordinates} icon={currentLocationPin} />
+						<Marker position={coordinates} icon={currentLocationPin}/>
 						<Circle
 							center={coordinates}
-							radius={radius}
+							radius={itemRadius || radius}
 							options={currentLocationOptions}
 						/>
 					</>
+					{MarkerArray}
+				
 				</GoogleMap>
 			</LoadScript>
 		</div>
