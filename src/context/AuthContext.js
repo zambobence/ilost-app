@@ -6,6 +6,7 @@ import {
 	signInWithEmailAndPassword,
 } from 'firebase/auth'
 import { doc, setDoc } from 'firebase/firestore'
+import { uploadDocument } from '../functions/uploadDocument'
 
 const AuthContext = createContext()
 
@@ -29,10 +30,7 @@ function AuthContextProvider({ children }) {
 			phone: '',
 			avatarUrl: '',
 		}
-
-		await setDoc(doc(db, 'users', user.uid), {
-			...dummyUserData,
-		})
+		uploadDocument('users', user.uid, dummyUserData)
 	}
 
 	const signIn = (email, password) => {

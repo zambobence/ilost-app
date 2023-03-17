@@ -1,7 +1,6 @@
-import { ref, uploadBytes, getDownloadURL } from 'firebase/storage'
+import { ref, uploadBytes, getDownloadURL, deleteObject } from 'firebase/storage'
 import { storage } from '../firebase'
 import React, {useState, useEffect} from 'react'
-import { nanoid } from 'nanoid'
 
 const useUploadImg = (file, filePath) => {
 	const [url, setUrl] = React.useState(null)
@@ -9,8 +8,6 @@ const useUploadImg = (file, filePath) => {
 	const [error, setError] = React.useState(null)
 
 	const uploadImg = async () => {
-
-        
 		try {
 			setLoading(true)
 			const imageRef = ref(storage, filePath)
@@ -25,6 +22,15 @@ const useUploadImg = (file, filePath) => {
 		setLoading(false)
     }
 
+	const deleteImg =() => {
+		const imageRef = ref(storage, filePath)
+		try {
+			deleteObject(imageRef)
+		} catch (e) {
+			console.log('Could not delete image')
+		}
+	}
+
         useEffect(()=> {
             console.log('useEffect runs')
             if(file !== null) {
@@ -35,7 +41,7 @@ const useUploadImg = (file, filePath) => {
             }
         },[file])
 
-  return {url, loading, error}
+  return {url, loading, error, deleteImg}
 }
 
 export default useUploadImg

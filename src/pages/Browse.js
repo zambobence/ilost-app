@@ -6,6 +6,7 @@ import {getUserLocationData} from '../functions/getUserLocationData'
 import Searchbar from '../components/Searchbar'
 import useFethcDB from '../customHooks/useFethcDB'
 import useFilterItems from '../customHooks/useFilterItems'
+import LostToggler from '../components/LostToggler'
 import Card from '../components/Card'
 
 function Browse() {
@@ -45,6 +46,8 @@ function Browse() {
     return (
     <div className='container grid'>
         <div className='form-container'>
+        <LostToggler />
+
             <DefaultForm />
             <LocationComponent coordinates={coordinates} placeData={placeData} />
         </div>

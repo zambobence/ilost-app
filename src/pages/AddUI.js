@@ -4,9 +4,12 @@ import Searchbar from '../components/Searchbar'
 import TitleCommentComponent from '../components/TitleCommentComponent'
 import LocationComponent from '../components/LocationComponent'
 import MapComponent from '../components/MapComponent'
+import LostToggler from '../components/LostToggler'
 import LoadingComponent from '../components/LoadingComponent'
 import DefaultForm from '../components/DefaultForm'
 import FileUploadComponent from '../components/FileUploadComponent'
+import useUploadImg from '../customHooks/useUploadImg'
+
 import { useNavigate } from 'react-router-dom'
 import { UserDataContext } from '../context/UserDataContext'
 import { AuthContext } from '../context/AuthContext'
@@ -20,10 +23,10 @@ import Modal from '../components/Modal'
 
 import { storage, db } from '../firebase'
 import { uploadImg } from '../functions/uploadImg'
-import { deleteImg } from '../functions/deleteImg'
+// import { deleteImg } from '../functions/deleteImg'
 import { getUserLocationData } from '../functions/getUserLocationData'
+import { uploadDocument } from '../functions/uploadDocument'
 import useUploadDocument from '../customHooks/useUploadDocument'
-
 
 function AddUI() {
 	const navigate = useNavigate()
@@ -41,29 +44,19 @@ function AddUI() {
 	
 	const [lost, setLost] = useState(true)
 	const [data, setData] = useState('')
-	const [fileRef, setFileRef] = useState('')
+	const [fileRef, setFileRef] = useState(`items/${itemId}`)
 	const [isLoading, setIsLoading] = useState(false)
 	const [modal, setModal] = useState({error: false, message: ''})
 	const {color, type, radius, date} = useContext(ItemDataContext)
 
+	const {url, loading, error, deleteImg} = useUploadImg(file, `items/${itemId}`)
+	const {docUploadLoading, docUploadEror, uploadDocument} = useUploadDocument()
 
-	// console.log(coordinates)
-	const handleFileUpload = async () => {
-		setIsLoading(true)
-	//	console.log('Async upload starts')
-		const filePath = `items/${itemId}`
-		setFileRef(filePath)
-		const url = await uploadImg(file, filePath)
-	//	console.log('The newly uploaded photo: ', url)
-		setImgUrl(url)
-		setTimeout(setIsLoading(false), 2000)
-	}
 
-	const {res, uploadDocument, loading, error} = useUploadDocument()
-	
 	useEffect(() => {
-		file && handleFileUpload()
-	}, [file])
+		setImgUrl(url)
+	}, [url])
+	
 
 	let allFilled
 
@@ -72,8 +65,9 @@ function AddUI() {
 	} else { allFilled = false }
 
 
+
 	const addItem = (e) => {
-		e.preventDefault()
+
 		const obj = {
 			id: itemId,
 			title,
@@ -89,22 +83,17 @@ function AddUI() {
 			date: Date.parse(date),
 			uploadTime: serverTimestamp(),
 		}
-		uploadDocument(obj)
-		console.log(res)
 
-/*		
 		if (allFilled) {
-			await setDoc(doc(db, 'items', obj.id), {...obj})
-			navigate('/')
-		} else {
-			setModal({error: true, message: 'Please fill out all fields'})
+			e.preventDefault()
+			console.log("New item: ", obj, itemId)
+			uploadDocument('items', itemId, obj)
+			//	navigate('/')
 		}
-*/
 	}
 
-
 	const handleDeleteImg = async () => {
-		await deleteImg(fileRef)
+		await deleteImg()
 		setImgUrl('')
 	}
 
@@ -123,22 +112,22 @@ function AddUI() {
         }
     },[coordinatesFetched])
 
+	console.log('File ref: ', fileRef)
 
   return (
     <>
-         { /*  
-		{modal.error && <Modal error={modal.error} modalMessage={modal.message} />}
-		{isLoading && <LoadingComponent loadingText={'Uploading image'}/>}
-		*/}
-        
+         
 		<div className='container grid'>
-			<form className='form-container' action='submit'>
+			{loading || docUploadLoading && <LoadingComponent />}
+			<form className='form-container'>
 				<h1>Add item</h1>
 				<TitleCommentComponent title={title} setTitle={setTitle} comment={comment} setComment={setComment} />
+				<LostToggler />
 				<DefaultForm />				
 				<LocationComponent coordinates={coordinates} placeData={placeData} />
-				<FileUploadComponent setFile={setFile} imgUrl={imgUrl} handleDeleteImg={handleDeleteImg}/>
-				<button className='btn' onClick={()=>addItem()} disabled={!allFilled}>
+				<FileUploadComponent file={file} setFile={setFile} imgUrl={imgUrl} handleDeleteImg={handleDeleteImg}/>
+
+				<button className='btn' onClick={(e)=>addItem(e)} disabled={!allFilled}>
 					Add item
 				</button>
 			</form>

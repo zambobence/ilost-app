@@ -10,14 +10,11 @@ import LoadingComponent from '../components/LoadingComponent'
 import useUploadImg from '../customHooks/useUploadImg'
 import { nanoid } from 'nanoid'
 function Profile({ handleSignout }) {
-	const { userData, setUserData } = useContext(UserDataContext)
+	const { userData } = useContext(UserDataContext)
 	const [editMode, setEditMode] = useState(false)
 	const [editUserData, setEditUserData] = useState(userData)
-	const [perc, setPerc] = useState(null)
 	const [file, setFile] = useState(null)
 	const [imgUrl, setImgUrl] = useState('')
-	const [isLoading, setIsLoading] = useState(false)
-
 	const {url, loading, error} = useUploadImg(file, `users/${userData.userId}`)
 
 	const toggleEdit = () => {
@@ -42,13 +39,10 @@ function Profile({ handleSignout }) {
 		setEditUserData({ ...editUserData, avatarUrl: url })
 	}, [url])
 
-	useEffect(() => {
-		console.log(userData)
-		console.log(editUserData)
-	},[])
+
 	return (
 		<div className='container grid'>
-			{isLoading && <LoadingComponent loadingText={'Uploading image...'} />}
+			{loading && <LoadingComponent loadingText={'Uploading image...'} />}
 			<div className='form-container'>
 				<div className='profile-picture-container'>
 					<div className='profile-picture-container'>

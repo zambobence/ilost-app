@@ -18,8 +18,7 @@ export default function Register() {
 			setAuthError('')
 			try {
 				// it makes an API call to firebase and waits for the data returned
-				const userCredentials = await createUser(email, password)
-
+				const userCredentials = await createUser(email, password) 
 				// then it uses this data to create an entry in users db
 				console.log(userCredentials.user)
 				await createUserinDB(userCredentials.user).then(() =>

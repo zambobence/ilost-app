@@ -10,7 +10,6 @@ function DefaultForm() {
 
     return (
         <div>
-            <LostToggler />
             <div className='input-cont'>
                 <label htmlFor='color'>Color</label>
                 <select name='color' value={color} onChange={(e)=> setColor(e.target.value)}>
