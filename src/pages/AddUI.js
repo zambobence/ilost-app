@@ -22,6 +22,7 @@ import { storage, db } from '../firebase'
 import { uploadImg } from '../functions/uploadImg'
 import { deleteImg } from '../functions/deleteImg'
 import { getUserLocationData } from '../functions/getUserLocationData'
+import useUploadDocument from '../customHooks/useUploadDocument'
 
 
 function AddUI() {
@@ -38,11 +39,12 @@ function AddUI() {
 	const [coordinatesFetched, setCoordinatesFetched] = useState(false)
     const [coordinates, setCoordinates] = useState({})
 	
+	const [lost, setLost] = useState(true)
 	const [data, setData] = useState('')
 	const [fileRef, setFileRef] = useState('')
 	const [isLoading, setIsLoading] = useState(false)
 	const [modal, setModal] = useState({error: false, message: ''})
-	const {color, type, lost, radius, date} = useContext(ItemDataContext)
+	const {color, type, radius, date} = useContext(ItemDataContext)
 
 
 	// console.log(coordinates)
@@ -56,11 +58,9 @@ function AddUI() {
 		setImgUrl(url)
 		setTimeout(setIsLoading(false), 2000)
 	}
-/*
-	useEffect(() => {
-		setItemId(nanoid())
-	}, [])
-*/
+
+	const {res, uploadDocument, loading, error} = useUploadDocument()
+	
 	useEffect(() => {
 		file && handleFileUpload()
 	}, [file])
@@ -72,7 +72,7 @@ function AddUI() {
 	} else { allFilled = false }
 
 
-	const addItem = async (e) => {
+	const addItem = (e) => {
 		e.preventDefault()
 		const obj = {
 			id: itemId,
@@ -89,13 +89,17 @@ function AddUI() {
 			date: Date.parse(date),
 			uploadTime: serverTimestamp(),
 		}
+		uploadDocument(obj)
+		console.log(res)
 
+/*		
 		if (allFilled) {
 			await setDoc(doc(db, 'items', obj.id), {...obj})
 			navigate('/')
 		} else {
 			setModal({error: true, message: 'Please fill out all fields'})
 		}
+*/
 	}
 
 
@@ -134,7 +138,7 @@ function AddUI() {
 				<DefaultForm />				
 				<LocationComponent coordinates={coordinates} placeData={placeData} />
 				<FileUploadComponent setFile={setFile} imgUrl={imgUrl} handleDeleteImg={handleDeleteImg}/>
-				<button className='btn' onClick={addItem} disabled={!allFilled}>
+				<button className='btn' onClick={()=>addItem()} disabled={!allFilled}>
 					Add item
 				</button>
 			</form>

@@ -7,7 +7,8 @@ import { db, auth } from '../firebase'
 import { doc, updateDoc } from 'firebase/firestore'
 
 import LoadingComponent from '../components/LoadingComponent'
-
+import useUploadImg from '../customHooks/useUploadImg'
+import { nanoid } from 'nanoid'
 function Profile({ handleSignout }) {
 	const { userData, setUserData } = useContext(UserDataContext)
 	const [editMode, setEditMode] = useState(false)
@@ -16,6 +17,9 @@ function Profile({ handleSignout }) {
 	const [file, setFile] = useState(null)
 	const [imgUrl, setImgUrl] = useState('')
 	const [isLoading, setIsLoading] = useState(false)
+
+	const {url, loading, error} = useUploadImg(file, `users/${userData.userId}`)
+
 	const toggleEdit = () => {
 		setEditMode((prevState) => !prevState)
 	}
@@ -33,39 +37,36 @@ function Profile({ handleSignout }) {
 		})
 	}
 
-	const handleFileUpload = async () => {
-		setIsLoading(true)
-		const filePath = `users/${userData.userId}/avatar`
-		const url = await uploadImg(file, filePath)
+	useEffect(() => {
 		setImgUrl(url)
 		setEditUserData({ ...editUserData, avatarUrl: url })
-		setTimeout(setIsLoading(false), 3000)
-	}
+	}, [url])
 
 	useEffect(() => {
-		file && handleFileUpload()
-	}, [file])
-
+		console.log(userData)
+		console.log(editUserData)
+	},[])
 	return (
 		<div className='container grid'>
 			{isLoading && <LoadingComponent loadingText={'Uploading image...'} />}
 			<div className='form-container'>
 				<div className='profile-picture-container'>
 					<div className='profile-picture-container'>
-						{editUserData?.avatarUrl === '' ? (
-						<img
-							src='https://source.unsplash.com/random/200x200/?profile'
+						{imgUrl !== '' ? 
+							<img
+							src={userData?.avatarUrl}
 							className='profile-avatar'
 							alt='avatar'
-						/>
-					) : (
+						/> :
 						<img
-							src={editUserData?.avatarUrl}
-							className='profile-avatar'
-							alt='avatar'
+						src={userData?.avatarUrl}
+						className='profile-avatar'
+						alt='avatar'
 						/>
-					)}
-					{editMode && (
+						}
+
+				
+						{editMode && (
 						<div className='upload-profile-img-overlay'>
 						<label
 							className='upload-profile-img-btn'

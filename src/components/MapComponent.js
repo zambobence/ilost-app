@@ -113,7 +113,7 @@ const containerStyle = {
 							options={currentLocationOptions}
 						/>
 					</>
-					{MarkerArray}
+					{MarkerArray && MarkerArray}
 				
 				</GoogleMap>
 			</LoadScript>

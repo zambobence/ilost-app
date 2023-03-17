@@ -2,6 +2,7 @@ import React, { useState, useContext, useEffect, createContext } from 'react'
 import { AuthContext } from './AuthContext'
 import { db } from '../firebase'
 import { onSnapshot, doc, collection } from 'firebase/firestore'
+import useFetchDocument from '../customHooks/useFetchDocument'
 
 const UserDataContext = createContext()
 
@@ -9,15 +10,11 @@ function UserDataContextProvider({ children }) {
 	const [userData, setUserData] = useState({})
 	const { authUser } = useContext(AuthContext)
 
-	useEffect(() => {
-		const unsub = () => {
-			authUser?.uid &&
-				onSnapshot(doc(db, 'users', authUser?.uid), (snapshot) => {
-					setUserData(snapshot.data())
-				})
-		}
-		return unsub()
-	}, [authUser?.uid]) // it has to be a primitive datatype as the objects are always false
+	const {fetchedData, loading, error} = useFetchDocument('users', authUser?.uid)
+
+	useEffect(() =>{
+		setUserData(fetchedData)
+	}, [fetchedData])
 
 	return (
 		<UserDataContext.Provider value={{ userData, setUserData }}>
