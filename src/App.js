@@ -1,4 +1,4 @@
-import './App.css'
+import './style.css'
 import React, { useState, useEffect, useContext } from 'react'
 import { Navigate, Link, Routes, Route, useNavigate } from 'react-router-dom'
 import { AuthContext } from './context/AuthContext'

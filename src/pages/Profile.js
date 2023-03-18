@@ -131,13 +131,6 @@ function Profile({ handleSignout }) {
 					</button>
 				</div>
 			</div>
-			<div className='placeholder-img-container'>
-				<img
-					src='https://images.unsplash.com/uploads/141103282695035fa1380/95cdfeef?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1430&q=80'
-					className='placeholder-img'
-					alt='placeholder img for desktop'
-				/>
-			</div>
 		</div>
 	)
 }

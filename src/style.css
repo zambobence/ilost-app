@@ -1,0 +1,315 @@
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  box-sizing: border-box;
+  font-size: 100%;
+}
+
+ul {
+  list-style: none;
+}
+
+h1, h2, h3, h4, p {
+  margin: 0;
+  padding: 0;
+  line-height: 1.1;
+}
+
+p {
+  font-weight: 400;
+}
+
+a {
+  font-family: inherit;
+  color: inherit;
+  text-decoration: none;
+}
+
+.loading {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(60, 54, 54, 0.701);
+  color: white;
+  font-size: 2rem;
+  z-index: 999;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.pac-container:after {
+  /* Disclaimer: not needed to show 'powered by Google' if also a Google Map is shown */
+  padding: 0;
+  margin: 0;
+  background-image: none !important;
+  height: 0px;
+}
+
+.map-container {
+  width: 100%;
+  height: 50vh;
+}
+
+.wrapper {
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-auto-rows: auto 1fr auto;
+  min-height: 100vh;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  grid-template-rows: auto;
+  grid-gap: 1rem;
+  align-items: start;
+  align-content: start;
+}
+
+.container {
+  width: 90%;
+  margin: 0 auto;
+}
+
+.form-container,
+.col {
+  grid-column: 1/-1;
+}
+
+.searchbar-container {
+  display: flex;
+  align-items: center;
+  flex-flow: row wrap;
+  justify-content: space-between;
+  margin-bottom: 0.5rem;
+}
+.searchbar-container div:first-of-type {
+  display: none;
+}
+.searchbar-container .searchbar-autocomplete {
+  flex-basis: 90%;
+  margin-right: auto;
+}
+.searchbar-container .searchbar-autocomplete-field {
+  display: inline-block;
+  width: 90%;
+}
+
+.form-container {
+  display: flex;
+  flex-direction: column;
+}
+
+input, select, textarea {
+  display: block;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  padding: 0.5rem;
+}
+
+.lost-toggler,
+.input-cont {
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: space-between;
+  align-items: end;
+  margin-bottom: 1rem;
+  gap: 5%;
+}
+
+textarea {
+  margin: 1rem 0;
+}
+
+.lost-toggler label,
+.input-cont label {
+  flex-basis: 20%;
+}
+
+.input-cont input:not([type=range]),
+.input-cont select {
+  flex-basis: 75%;
+  width: 75%;
+}
+
+.input-cont input[type=range] {
+  flex-basis: 50%;
+  width: 50%;
+  margin-right: auto;
+}
+
+input[type=text] {
+  -webkit-appearance: none;
+  width: 100%;
+}
+
+.input-cont:has(input[type=range]) {
+  align-items: center;
+}
+
+.location {
+  padding: 0 0 0.5rem;
+}
+
+img {
+  display: block;
+  max-height: 30vh;
+  -o-object-fit: cover;
+     object-fit: cover;
+  width: 100%;
+  max-width: 600px;
+}
+
+@media (min-width: 56.25em) {
+  .form-container,
+  .col {
+    grid-column: span 6;
+  }
+  .map-container {
+    height: 90vh;
+  }
+}
+header {
+  padding: 0.75rem 0;
+}
+header nav {
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: space-between;
+  align-items: center;
+}
+header nav .menu-list {
+  flex-basis: 100%;
+  display: none;
+}
+header nav .close-menu-toggler {
+  display: none;
+}
+header nav.open .close-menu-toggler {
+  display: block;
+}
+header nav.open .open-menu-toggler {
+  display: none;
+}
+header nav.open .menu-list {
+  height: 100vh;
+  position: absolute;
+  top: 4rem;
+  left: 0;
+  width: 100%;
+  display: block;
+  text-align: center;
+}
+header nav.open .menu-item {
+  text-transform: capitalize;
+  font-weight: 900;
+  font-size: 24px;
+  padding: 1rem;
+}
+@media (min-width: 43.75em) {
+  header nav .menu-toggler {
+    display: none;
+  }
+  header nav .menu-list {
+    display: flex;
+    flex-basis: auto;
+    gap: 1rem;
+  }
+  header nav .menu-item {
+    font-size: 1rem;
+    font-weight: 600;
+  }
+}
+
+@media (min-width: 56.25em) {
+  .browseui {
+    grid-template-rows: repeat(2, auto);
+  }
+  .browseui .col {
+    grid-row: 1/3;
+  }
+  .browseui .form-container {
+    grid-row: 1/2;
+  }
+}
+.browseui .card-container {
+  grid-column: 1/-1;
+  display: flex;
+  overflow-x: auto;
+  min-height: 100%;
+  gap: 0.5rem;
+}
+@media (min-width: 56.25em) {
+  .browseui .card-container {
+    grid-column: span 6;
+    grid-row: 2/3;
+    flex-wrap: wrap; /* allow vertical wrapping */
+    overflow-x: hidden; /* hide horizontal scrollbar */
+    overflow-y: auto; /* allow vertical scrolling */
+    height: 63vh; /* set a fixed height */
+    justify-content: space-between;
+  }
+}
+.browseui .card {
+  flex-basis: 30%;
+  flex-shrink: 0;
+  background-color: #eee;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  padding: 20px;
+  box-sizing: border-box;
+}
+@media (min-width: 56.25em) {
+  .browseui .card {
+    flex-basis: 49%;
+    max-height: 45vh;
+  }
+  .browseui .card:last-of-type {
+    margin-right: auto;
+    margin-left: 0.5rem;
+  }
+}
+@media (min-width: 56.25em) and (min-width: 75em) {
+  .browseui .card {
+    flex-basis: 32%;
+  }
+}
+
+.form-container i {
+  font-size: 1.5rem;
+  color: #2b2323;
+}
+
+.lost-toggler i {
+  margin-right: auto;
+}
+
+.searchbar-autocomplete-field,
+select,
+input:not([type=range]) {
+  border: none;
+  border-radius: 0;
+  border: none;
+  border-bottom: 1px solid #ccc;
+}
+.searchbar-autocomplete-field:focus,
+select:focus,
+input:not([type=range]):focus {
+  outline: none;
+  border-bottom: 1px solid #2b2323;
+}
+.searchbar-autocomplete-field::-moz-placeholder, select::-moz-placeholder, input:not([type=range])::-moz-placeholder {
+  color: #ccc;
+}
+.searchbar-autocomplete-field::placeholder,
+select::placeholder,
+input:not([type=range])::placeholder {
+  color: #ccc;
+}/*# sourceMappingURL=style.css.map */

@@ -1,0 +1,17 @@
+@mixin crossBrowserTransform($transform, $timing, $transform-origin) {
+    -webkit-transform: $transform;
+    -moz-transform: $transform;
+    -ms-transform: $transform;
+    -o-transform: $transform;
+    transform: $transform;
+    -webkit-transition: all $timing ease-in-out;
+    -moz-transition: all $timing ease-in-out;
+    -o-transition: all $timing ease-in-out;
+    -ms-transition: all $timing ease-in-out;
+    transition: all $timing ease-in-out;
+    transform-origin: $transform-origin;
+    -o-transform-origin: $transform-origin;
+    -ms-transform-origin: $transform-origin;
+    -moz-transform-origin: $transform-origin;
+    -webkit-transform-origin: $transform-origin;
+}

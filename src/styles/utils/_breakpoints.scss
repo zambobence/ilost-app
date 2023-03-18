@@ -1,0 +1,14 @@
+// 700 
+// 990
+
+$breakpoints-up: (
+    "tablet": 43.75em,
+    "laptop": 56.25em,
+    "desktop": 75em
+);
+
+@mixin breakpoint($size) {
+    @media (min-width: map-get($breakpoints-up, $size)){
+        @content
+    }
+}

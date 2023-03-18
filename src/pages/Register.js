@@ -66,13 +66,7 @@ export default function Register() {
 				{authError || null}
 				<button className='btn'>Register</button>
 			</form>
-			<div className='placeholder-img-container'>
-				<img
-					src='https://images.unsplash.com/photo-1523705480679-b5d0cc17a656?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=735&q=80'
-					className='placeholder-img'
-					alt='placeholder img for desktop'
-				/>
-			</div>
+
 		</div>
 	)
 }

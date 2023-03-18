@@ -1,9 +1,4 @@
-:root {
-	--footer-height: 1.8rem;
-	--header-font-size: 1.5rem;
-	--header-padding: 0.5rem;
-	--accent-color: #ff8800;
-}
+
 * {
 	box-sizing: border-box;
 	padding: 0;
@@ -79,16 +74,14 @@ a {
 	grid-column: 1 / -1;
 }
 
-.container {
-	width: 90%;
-	margin: 0 auto;
-}
+
 
 .searchbar-container {
 	display: flex;
 	align-items: center;
 	flex-flow: row wrap;
 	justify-content: space-between;
+	margin-bottom: .5rem;
 }
 
 .searchbar-container > div:first-of-type {
@@ -103,73 +96,19 @@ a {
 .searchbar-autocomplete-field {
 	display: inline-block;
 	width: 90%;
-}
-
-.form-container {
-	display: flex;
-	flex-direction: column;
-}
-
-input, select, textarea {
-	display: block;
-	border: 1px solid #ccc;
-	border-radius: 4px;
-	padding: 0.5rem;
-}
-
-
-.lost-toggler,
-.input-cont {
-	display: flex;
-	flex-flow: row wrap;
-	margin-bottom: 1rem;
-	justify-content: space-between;
-	align-items: end;
-	gap: 5%;
-}
-
-
-.lost-toggler label,
-.input-cont label {
-	flex-basis: 20%;
-}
-
-.input-cont input:not([type="range"]),
-.input-cont select {
-	flex-basis: 75%;
-	width: 75%;
-}
-
-.input-cont input[type="range"] {
-	flex-basis: 50%;
-	width: 50%;
-	margin-right: auto;
-}
-
-
-.lost-toggler button {
-	margin-right: auto;
-	background-color: transparent;
 	border: none;
-	font-size: 1.3rem;
+	border-bottom: 1px solid #ccc;
+	border-radius: 0;
 }
 
-.input-cont:has(input[type="range"]) {
-	align-items: center;
+input
+
+.searchbar-autocomplete-field:focus {
+	outline: none;
+	border-color: #252525;
 }
 
-.location {
-	padding: 0 0 .5rem;
-}
 
-
-img {
-	display: block;
-	max-height: 30vh;
-	object-fit: cover;
-	width: 100%;
-	max-width: 600px;
-}
 
 @media (min-width: 800px) {
 	.form-container,
@@ -179,8 +118,6 @@ img {
 		grid-column: span 6 ;
 	}
 
-	.map-container {
-		height: 90vh;
-	}
+	
 
 }

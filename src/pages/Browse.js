@@ -44,23 +44,23 @@ function Browse() {
 
 
     return (
-    <div className='container grid'>
+    <div className='container browseui grid '>
         <div className='form-container'>
-        <LostToggler />
-
             <DefaultForm />
             <LocationComponent coordinates={coordinates} placeData={placeData} />
         </div>
         <div className='col'>
-        <Searchbar
-            setCoordinates={setCoordinates}
-            setPlaceData={setPlaceData}
-            getCurrentLocation={fetchLocationData}
-		/>
+            <Searchbar
+                setCoordinates={setCoordinates}
+                setPlaceData={setPlaceData}
+                getCurrentLocation={fetchLocationData}
+            />
 
-        <MapComponent coordinates={coordinates} setCoordinates={setCoordinates} setPlaceData={setPlaceData} itemsToDisplay={filteredItemList} browseMode={true}/>
+            <MapComponent coordinates={coordinates} setCoordinates={setCoordinates} setPlaceData={setPlaceData} itemsToDisplay={filteredItemList} browseMode={true}/>
         </div>
-        {loading ? <p>Loading</p> : CardArray}
+        <div className='card-container'>
+            {loading ? <p>Loading</p> : CardArray}
+        </div>
     </div>
   )
 }

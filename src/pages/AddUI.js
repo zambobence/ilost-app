@@ -10,22 +10,14 @@ import DefaultForm from '../components/DefaultForm'
 import FileUploadComponent from '../components/FileUploadComponent'
 import useUploadImg from '../customHooks/useUploadImg'
 
-import { useNavigate } from 'react-router-dom'
 import { UserDataContext } from '../context/UserDataContext'
-import { AuthContext } from '../context/AuthContext'
 import { ItemDataContext } from '../context/ItemDataContext'
-import {
-	setDoc,
-	doc,
-	serverTimestamp,
-} from 'firebase/firestore'
-import Modal from '../components/Modal'
+import { AuthContext } from '../context/AuthContext'
 
-import { storage, db } from '../firebase'
-import { uploadImg } from '../functions/uploadImg'
-// import { deleteImg } from '../functions/deleteImg'
+import { useNavigate } from 'react-router-dom'
 import { getUserLocationData } from '../functions/getUserLocationData'
-import { uploadDocument } from '../functions/uploadDocument'
+import { serverTimestamp } from 'firebase/firestore'
+import Modal from '../components/Modal'
 import useUploadDocument from '../customHooks/useUploadDocument'
 
 function AddUI() {
@@ -88,7 +80,7 @@ function AddUI() {
 			e.preventDefault()
 			console.log("New item: ", obj, itemId)
 			uploadDocument('items', itemId, obj)
-			//	navigate('/')
+			navigate('/')
 		}
 	}
 
@@ -106,7 +98,7 @@ function AddUI() {
 
 	
     useEffect(() => {
-        if (!coordinatesFetched){
+        if (!coordinatesFetched || coordinates.lat === undefined){
             fetchLocationData()
 			setCoordinatesFetched(true)
         }
@@ -117,12 +109,11 @@ function AddUI() {
   return (
     <>
          
-		<div className='container grid'>
+		<div className='container grid addui'>
 			{loading || docUploadLoading && <LoadingComponent />}
 			<form className='form-container'>
 				<h1>Add item</h1>
 				<TitleCommentComponent title={title} setTitle={setTitle} comment={comment} setComment={setComment} />
-				<LostToggler />
 				<DefaultForm />				
 				<LocationComponent coordinates={coordinates} placeData={placeData} />
 				<FileUploadComponent file={file} setFile={setFile} imgUrl={imgUrl} handleDeleteImg={handleDeleteImg}/>
@@ -131,12 +122,14 @@ function AddUI() {
 					Add item
 				</button>
 			</form>
+			<div className='col'>
 			<Searchbar
 				setCoordinates={setCoordinates}
 				setPlaceData={setPlaceData}
 				getCurrentLocation={fetchLocationData}
 			/>
 			<MapComponent coordinates={coordinates} setCoordinates={setCoordinates} setPlaceData={setPlaceData}/>
+			</div>
 		</div>
 	</>
 	)
