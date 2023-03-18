@@ -15,6 +15,8 @@ import Browse from './pages/Browse.js'
 import Footer from './components/Footer'
 function App() {
 
+	
+
 
 	
 
@@ -40,6 +42,20 @@ function App() {
 	}
 
 	
+	const [windowWidth, setWindowWidth] = useState(window.innerWidth)
+	
+	const [expanded, setExpanded] = useState(false)
+	const toggleExpanded = () => {
+		setExpanded(prevState => !prevState)
+	}
+	
+	useEffect(() => {
+		console.log('window width is: ', windowWidth)
+		if (windowWidth > 699) {
+			setExpanded(false)
+		}
+	},[windowWidth])
+
 
 
 
@@ -49,6 +65,8 @@ function App() {
 		<div className='wrapper'>
 			<Header
 				handleSignout={handleSignout}
+				toggleExpanded={toggleExpanded}
+				expanded={expanded}
 			/>
 
 			<main>

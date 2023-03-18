@@ -1,3 +1,4 @@
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&display=swap");
 *, *::before, *::after {
   box-sizing: border-box;
   margin: 0;
@@ -27,6 +28,16 @@ a {
   font-family: inherit;
   color: inherit;
   text-decoration: none;
+}
+
+body {
+  font-family: "Montserrat", sans-serif;
+}
+
+.logo {
+  color: #f89e21;
+  font-weight: 500;
+  font-size: 1.2rem;
 }
 
 .loading {
@@ -188,6 +199,7 @@ header nav {
 header nav .menu-list {
   flex-basis: 100%;
   display: none;
+  background-color: rgba(248, 248, 255, 0.703);
 }
 header nav .close-menu-toggler {
   display: none;
@@ -201,17 +213,21 @@ header nav.open .open-menu-toggler {
 header nav.open .menu-list {
   height: 100vh;
   position: absolute;
-  top: 4rem;
+  top: 2.5rem;
   left: 0;
   width: 100%;
   display: block;
   text-align: center;
+  z-index: 999;
 }
 header nav.open .menu-item {
   text-transform: capitalize;
-  font-weight: 900;
+  font-weight: 400;
   font-size: 24px;
   padding: 1rem;
+}
+header nav.open .menu-item a:hover {
+  color: #f89e21;
 }
 @media (min-width: 43.75em) {
   header nav .menu-toggler {
@@ -221,8 +237,17 @@ header nav.open .menu-item {
     display: flex;
     flex-basis: auto;
     gap: 1rem;
+    background-color: transparent;
   }
-  header nav .menu-item {
+  header nav.open .menu-list {
+    position: static;
+    height: auto;
+    width: auto;
+    display: flex;
+    flex-basis: auto;
+    background-color: transparent;
+  }
+  header nav.open .menu-item {
     font-size: 1rem;
     font-weight: 600;
   }
@@ -250,20 +275,23 @@ header nav.open .menu-item {
   .browseui .card-container {
     grid-column: span 6;
     grid-row: 2/3;
-    flex-wrap: wrap; /* allow vertical wrapping */
-    overflow-x: hidden; /* hide horizontal scrollbar */
-    overflow-y: auto; /* allow vertical scrolling */
-    height: 63vh; /* set a fixed height */
+    flex-wrap: wrap;
+    overflow-x: hidden;
+    overflow-y: auto;
+    height: 63vh;
     justify-content: space-between;
   }
 }
 .browseui .card {
-  flex-basis: 30%;
+  flex-basis: 60%;
   flex-shrink: 0;
-  background-color: #eee;
   border: 1px solid #ccc;
-  border-radius: 4px;
+  border-radius: 0.2rem;
   box-sizing: border-box;
+}
+.browseui .card:only-child {
+  height: -moz-fit-content;
+  height: fit-content;
 }
 .browseui .card .coordinates {
   display: none;
@@ -271,21 +299,30 @@ header nav.open .menu-item {
 .browseui .card .location {
   align-self: center;
 }
+.browseui .card .card-top {
+  height: 25vh;
+}
+.browseui .card .card-top img {
+  display: block;
+  height: 100%;
+  width: 100%;
+  overflow: hidden;
+  -o-object-fit: cover;
+     object-fit: cover;
+}
 .browseui .card .card-bottom {
   padding: 0.5rem;
+  display: grid;
+  grid-template-rows: 3rem 1fr;
+  grid-template-columns: 1fr;
+  gap: 0.5rem;
+  font-size: 0.8rem;
 }
 .browseui .card .card-title {
-  font-size: 1.1rem;
-  font-weight: 500;
-  margin-bottom: 0.5rem;
-}
-.browseui .card .card-bottom {
   font-size: 0.9rem;
-  display: grid;
-  grid-template-rows: 4rem, auto;
-}
-.browseui .card .card-bottom {
-  align-items: end;
+  font-weight: 500;
+  align-self: start;
+  overflow: hidden;
 }
 .browseui .card p {
   margin: 0.5rem 0;
@@ -300,12 +337,8 @@ header nav.open .menu-item {
   .browseui .card {
     flex-basis: 49%;
   }
-  .browseui .card:last-of-type {
-    margin-right: auto;
-    margin-left: 0.5rem;
-  }
 }
-@media (min-width: 56.25em) and (min-width: 75em) {
+@media (min-width: 75em) {
   .browseui .card {
     flex-basis: 32%;
   }

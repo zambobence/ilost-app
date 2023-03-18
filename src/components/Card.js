@@ -5,18 +5,20 @@ import TypeComponent from './TypeComponent'
 import ColorComponent from './ColorComponent'
 import {Link} from 'react-router-dom'
 import DateComponent from './DateComponent'
+import image_placeholder from '../img/image_placeholder.jpg'
+import CardTitleComponent from './CardTitleComponent'
  
 function Card({data:item}) {
     console.log(item)
   return (
     <div className='card'>
         <div className='card-top'>
-            <img src={item?.imgUrl || 'https://via.placeholder.com/150'} alt='item' />
+            <img src={item?.imgUrl || image_placeholder} alt='item' />
         </div>
 
         <div className='card-bottom'>   
                     
-            <h2 className='card-title'><Link to={`/item/${item?.id}`}>{item?.title}</Link></h2>
+            <CardTitleComponent title={item?.title} id={item?.id}/>
             <div className='card-details'>
             <LocationComponent placeData={item?.placeData} coordinates={item?.loc}/>
             <DistanceComponent distance={item?.distance} />

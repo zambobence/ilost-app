@@ -1,15 +1,11 @@
-import React, { useContext, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { AuthContext } from '../context/AuthContext'
-function Header({ handleSignout, clearCriteria }) {
+function Header({ handleSignout, clearCriteria, expanded, toggleExpanded }) {
 
 	const { authUser } = useContext(AuthContext)
 	const currentUser = authUser?.uid
-	const [expanded, setExpanded] = useState(false)
-
-	const toggleExpanded = () => {
-		setExpanded(prevState => !prevState)
-	}
+	
 	
 	return (
 		<>

@@ -1,6 +1,16 @@
 @use 'utils' as *;
 
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&display=swap');
 
+body {
+    font-family: 'Montserrat', sans-serif;
+}
+
+.logo {
+    color: $accent-color;
+    font-weight: 500;
+    font-size: 1.2rem;
+}
 
 .loading {
 	position: absolute;
@@ -168,6 +178,7 @@ header {
         .menu-list {
             flex-basis: 100%;
             display: none;
+            background-color: rgba(248, 248, 255, 0.703);
         };
 
         .close-menu-toggler {
@@ -186,18 +197,22 @@ header {
             .menu-list {
                 height: 100vh;
                 position: absolute;
-                top: 4rem;
+                top: 2.5rem;
                 left: 0;
                 width: 100%;
                 display: block;
                 text-align: center;
+                z-index: 999;
             };
             
             .menu-item {
                 text-transform: capitalize;
-                font-weight: 900;
+                font-weight: 400;
                 font-size: 24px;
                 padding: 1rem;
+            }
+            .menu-item a:hover {
+                color: $accent-color
             }
         };
 
@@ -209,11 +224,22 @@ header {
             .menu-list {
                 display: flex;
                 flex-basis: auto;
-                gap: 1rem
+                gap: 1rem;
+                background-color: transparent
             };
-            .menu-item {
-                font-size: 1rem;
-                font-weight: 600;
+            &.open {
+                .menu-list {
+                    position: static;
+                    height: auto;
+                    width: auto;
+                    display: flex;
+                    flex-basis: auto;
+                    background-color: transparent;
+                };
+                .menu-item {
+                    font-size: 1rem;
+                    font-weight: 600;
+                }
             }
 
         }
@@ -245,22 +271,26 @@ header {
         @include breakpoint(laptop) {
             grid-column: span 6;
             grid-row: 2 / 3;
-            flex-wrap: wrap; /* allow vertical wrapping */
-            overflow-x: hidden; /* hide horizontal scrollbar */
-            overflow-y: auto; /* allow vertical scrolling */
-            height: 63vh; /* set a fixed height */
+            flex-wrap: wrap;
+            overflow-x: hidden;
+            overflow-y: auto; 
+            height: 63vh;
             justify-content: space-between;
         }
         }
     
     .card {
-        flex-basis: 30%;
+        flex-basis: 60%;
         flex-shrink: 0;
-        background-color: #eee;
         border: 1px solid #ccc;
-        border-radius: 4px;
+        border-radius: .2rem;
         box-sizing: border-box;
         
+
+        &:only-child{
+            height: fit-content;
+        }
+
         .coordinates {
             display: none;
         }
@@ -269,25 +299,38 @@ header {
             align-self: center;
         }
 
+        .card-top {
+            height: 25vh;
+            img {
+                display: block;
+                height: 100%;
+                width: 100%;
+                overflow: hidden;
+                object-fit: cover;
+            }
+        }
+
         .card-bottom {
             padding: .5rem;
-        }
+            display: grid;
+            grid-template-rows: 3rem 1fr;
+            grid-template-columns: 1fr;
+            gap: .5rem;
+            font-size: .8rem;
+            }
 
         .card-title {
-            font-size: 1.1rem;
-            font-weight: 500;
-            margin-bottom: .5rem;
-        }
-
-        .card-bottom {
             font-size: .9rem;
-            display: grid;
-            grid-template-rows: 4rem, auto;
+            font-weight: 500;
+            align-self: start;
+            overflow: hidden;
         }
 
-        .card-bottom {
-            align-items: end;
-        }
+        
+
+        
+
+
 
         p {
             i {
@@ -304,17 +347,12 @@ header {
 
         @include breakpoint(laptop) {
             flex-basis: 49%;
-            &:last-of-type {
-                margin-right: auto;
-                margin-left: .5rem;
-        
         }
 
         @include breakpoint(desktop) {
             flex-basis: 32%;
         }
     }
-}
 }
 
 .form-container {
@@ -382,3 +420,4 @@ input:not([type="range"]) {
        overflow: hidden;
     }
 }
+

@@ -5,13 +5,16 @@ function TitleCommentComponent({title, setTitle, comment, setComment}) {
     <>
     <div className='input-cont'>
       <label htmlFor='title'>Title</label>
+      
       <input
           name='title'
           className='title'
           value={title}
           onChange={(e) => setTitle(e.target.value)}
           placeholder='Title'
+          maxLength='30'
       />
+
       </div>
       <label htmlFor='comment'>Comment</label>
       <textarea
