@@ -12,8 +12,13 @@ function DateComponent({date}) {
         }
         else {
             const formattedDate = format(date, 'yyyy-MM-dd')
-            return <span>{formattedDate}</span>
-        }
+            return (
+            <p>
+                <i aria-label='date' className="fa-solid fa-calendar"></i>
+                {formattedDate}
+            </p>
+            )    
+    }
     }   
 }
 

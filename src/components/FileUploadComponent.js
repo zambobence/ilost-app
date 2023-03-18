@@ -2,16 +2,15 @@ import React from 'react'
 
 function FileUploadComponent({file, setFile, imgUrl, handleDeleteImg}) {
   return (
-    <div className='addui-img-container'>
+    <div className='file-upload-component'>
 					{file ? (
 						<>
-							<img className='addui-img-preview' alt='preview' src={imgUrl} />
-							<div className='delete-icon-overlay'>
-								<i
-									className='deleteIcon fa-solid fa-trash'
-									onClick={handleDeleteImg}
-								></i>
-							</div>
+							<i
+                                className='deleteIcon fa-solid fa-trash'
+                                onClick={handleDeleteImg}
+                            ></i>
+							<img className='img-preview' alt='preview' src={imgUrl} />
+
 						</>
 					    ) : (
                         <>

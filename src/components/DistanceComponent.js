@@ -2,7 +2,7 @@ import React from 'react'
 
 function DistanceComponent({distance}) {
   return (
-    <span>{Number(distance).toFixed(2)} km</span>
+    <span>{Number(distance).toFixed(2)} km from you</span>
   )
 }
 

@@ -87,6 +87,7 @@ function AddUI() {
 	const handleDeleteImg = async () => {
 		await deleteImg()
 		setImgUrl('')
+		setFile('')
 	}
 
 	const fetchLocationData = async () => {
