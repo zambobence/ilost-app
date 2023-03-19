@@ -8,6 +8,8 @@ import useFethcDB from '../customHooks/useFethcDB'
 import useFilterItems from '../customHooks/useFilterItems'
 import LostToggler from '../components/LostToggler'
 import Card from '../components/Card'
+import  {collection, onSnapshot, doc, updateDoc} from 'firebase/firestore'
+import {db} from '../firebase'
 
 function Browse() {
 

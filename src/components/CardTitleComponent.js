@@ -2,7 +2,7 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 
 function CardTitleComponent({title, id}) {
-
+    
     let titleToDisplay;
 
     if (title.length > 30){

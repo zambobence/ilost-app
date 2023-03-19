@@ -89,6 +89,7 @@ body {
   margin: 0 auto;
 }
 
+.map-container,
 .form-container,
 .col {
   grid-column: 1/-1;
@@ -313,7 +314,7 @@ header nav.open .menu-item a:hover {
 .browseui .card .card-bottom {
   padding: 0.5rem;
   display: grid;
-  grid-template-rows: 3rem 1fr;
+  grid-template-rows: auto 1fr;
   grid-template-columns: 1fr;
   gap: 0.5rem;
   font-size: 0.8rem;
