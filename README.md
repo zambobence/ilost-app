@@ -32,6 +32,8 @@ The user's current location in coordinates retrieved using the [Geolocation API]
 
 I have used [React Router](https://reactrouter.com/en/main) for routing and the React Context API to hold and provide the userdata and authentication data for the application.
 
+Regadring the styling I have used SASS, and followed the mobile first approach.
+
 ### Screenshots
 
 ![Screenshot](https://firebasestorage.googleapis.com/v0/b/frontendportfolio-b0a92.appspot.com/o/ilost%20(2).jpeg?alt=media&token=0ec9be18-15c8-43cd-a5fb-5c3e2fcbb2e3)
