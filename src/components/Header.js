@@ -1,11 +1,14 @@
 import React, { useContext, useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { AuthContext } from '../context/AuthContext'
-function Header({ handleSignout, clearCriteria, expanded, toggleExpanded }) {
+function Header({ handleSignout, setExpanded, expanded, toggleExpanded }) {
 
 	const { authUser } = useContext(AuthContext)
 	const currentUser = authUser?.uid
 	
+	const interactWithMenu = () => {
+		setExpanded(false)
+	}
 	
 	return (
 			<header className='Header'>
@@ -13,17 +16,17 @@ function Header({ handleSignout, clearCriteria, expanded, toggleExpanded }) {
 					<nav className={expanded ? 'open' : null }>
 					<p className='logo'>iLost</p>
 						<ul className='menu-list'>
-							<li className="menu-item"><Link to="/">Home</Link></li>
-							<li className="menu-item"><Link to="/browse">Browse</Link></li>
+							<li className="menu-item" onClick={interactWithMenu}><Link to="/">Home</Link></li>
+							<li className="menu-item" onClick={interactWithMenu}><Link to="/browse">Browse</Link></li>
 							{currentUser ?
 							<>
-								<li className="menu-item"><Link to="/additem">Add Item</Link></li>
-								<li className="menu-item"><Link to="/profile">Profile</Link></li>
-								<li className="menu-item"><Link to="/signin" onClick={handleSignout}>Signout</Link></li>
+								<li className="menu-item" onClick={interactWithMenu}><Link to="/additem">Add Item</Link></li>
+								<li className="menu-item" onClick={interactWithMenu}><Link to="/profile">Profile</Link></li>
+								<li className="menu-item" onClick={interactWithMenu}><Link to="/signin" onClick={handleSignout}>Signout</Link></li>
 							</>
 							: <>
-							<li className="menu-item"><Link to="/login">Login</Link></li>
-							<li className="menu-item"><Link to="/register">Register</Link></li>
+							<li className="menu-item" onClick={interactWithMenu}><Link to="/login">Login</Link></li>
+							<li className="menu-item" onClick={interactWithMenu}><Link to="/register">Register</Link></li>
 							</>
 						}
 						</ul>

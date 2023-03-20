@@ -600,6 +600,22 @@ button:hover {
 footer {
   text-align: center;
   background-color: #2b2323;
-  color: #f89e21;
+  color: white;
   margin-top: 1rem;
+}
+footer a:hover {
+  color: #f89e21;
+}
+footer .social {
+  display: flex;
+  justify-content: center;
+  margin: 1rem 0;
+}
+footer .social i {
+  font-size: 1.5rem;
+  margin: 0 1rem;
+  cursor: pointer;
+}
+footer .social i:hover {
+  color: #f89e21;
 }/*# sourceMappingURL=style.css.map */

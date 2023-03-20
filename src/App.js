@@ -67,6 +67,7 @@ function App() {
 				handleSignout={handleSignout}
 				toggleExpanded={toggleExpanded}
 				expanded={expanded}
+				setExpanded={setExpanded}
 			/>
 
 			<main>

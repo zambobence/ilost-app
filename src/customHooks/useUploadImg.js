@@ -11,11 +11,9 @@ const useUploadImg = (file, filePath,) => {
 		try {
 			setLoading(true)
 			const imageRef = ref(storage, filePath)
-            console.log(imageRef)
 			const snapshot = await uploadBytes(imageRef, file)
 			const url = await getDownloadURL(snapshot.ref)
 			setUrl(url)
-            console.log(url)
 		} catch (e) {
 			setError(e.message)
 		}
