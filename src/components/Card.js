@@ -9,7 +9,6 @@ import image_placeholder from '../img/image_placeholder.jpg'
 import CardTitleComponent from './CardTitleComponent'
  
 function Card({data:item}) {
-    console.log(item)
   return (
     <div className='card'>
         <div className='card-top'>

@@ -8,7 +8,6 @@ function Header({ handleSignout, clearCriteria, expanded, toggleExpanded }) {
 	
 	
 	return (
-		<>
 			<header className='Header'>
 				<div className='container'>
 					<nav className={expanded ? 'open' : null }>
@@ -35,8 +34,6 @@ function Header({ handleSignout, clearCriteria, expanded, toggleExpanded }) {
 					</nav>
 				</div>
 			</header>
-			
-		</>
 	)
 }
 

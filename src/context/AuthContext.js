@@ -5,14 +5,16 @@ import {
 	createUserWithEmailAndPassword,
 	signInWithEmailAndPassword,
 } from 'firebase/auth'
-import { doc, setDoc } from 'firebase/firestore'
-import { uploadDocument } from '../functions/uploadDocument'
-
+import useUploadDocument from '../customHooks/useUploadDocument'
 const AuthContext = createContext()
 
+
+
 function AuthContextProvider({ children }) {
+	const {docUploadLoading, docUploadEror, uploadDocument} = useUploadDocument()
 	const [authUser, setAuthUser] = useState({})
 
+	
 	useEffect(() => {
 		return onAuthStateChanged(auth, (user) => setAuthUser(user))
 	}, [])
@@ -22,6 +24,8 @@ function AuthContextProvider({ children }) {
 	}
 
 	const createUserinDB = async (user) => {
+		console.log('creating user in db')
+		console.log(user)
 		const dummyUserData = {
 			userId: user.uid,
 			fname: '',

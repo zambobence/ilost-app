@@ -19,6 +19,7 @@ export default function Register() {
 			try {
 				// it makes an API call to firebase and waits for the data returned
 				const userCredentials = await createUser(email, password) 
+				console.log('Registering')
 				// then it uses this data to create an entry in users db
 				console.log(userCredentials.user)
 				await createUserinDB(userCredentials.user).then(() =>
@@ -38,7 +39,7 @@ export default function Register() {
 	}
 
 	return (
-		<div className='register-container'>
+		<div className='container register-page'>
 			{isLoading && <LoadingComponent loadingText={'Registering in progress'} />}
 			<form className='form-container' onSubmit={handleSubmit}>
 				<h2 className='form-container-headline'>

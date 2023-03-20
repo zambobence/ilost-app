@@ -75,9 +75,9 @@ function App() {
 					<Route
 						path='/additem'
 						element={
-							//<RequireAuth>
+							<RequireAuth>
 								<AddUI/>
-							//</RequireAuth>
+							</RequireAuth>
 						}
 					/>
 					<Route

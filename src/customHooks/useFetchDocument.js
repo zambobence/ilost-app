@@ -31,7 +31,7 @@ function useFetchDocument(colName, id) {
     }, [colName, id])
 
 
-  return {fetchedData, loading, error}
+  return {fetchedData, loading, error, fetchData}
 }
 
 export default useFetchDocument

@@ -7,6 +7,6 @@ export const fetchPlaceDetails = async (lat, lng) => {
 	const inJson = await data.json()
 
 	// calls a function that forms the place object
-	const res = createPlaceObj(inJson.results[0].address_components)
+	const res = createPlaceObj(inJson?.results[0].address_components)
 	return res
 }

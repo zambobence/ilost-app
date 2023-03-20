@@ -6,6 +6,7 @@ function useFethcDB() {
 
     const [fetchedData, setFetchedData] = React.useState([])
     const [loading, setLoading] = React.useState(true)
+    
     function fetchItems() {
         setLoading(true)
         const colRef = collection(db, 'items')

@@ -29,7 +29,7 @@ function Login() {
 		}
 	}
 	return (
-		<div className='container grid'>
+		<div className='container login-page'>
 			<form className='form-container' onSubmit={handleLogin}>
 				<h2 className='form-container-headline'>Login to post an item you have found or lost.</h2>
 				<input

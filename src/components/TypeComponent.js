@@ -3,7 +3,7 @@ import React from 'react'
 function TypeComponent({type}) {
   return (
     <p>
-        Type: {type}
+        <i aria-label='type' className="fa-solid fa-question"></i>{type}
     </p>
   )
 }

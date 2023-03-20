@@ -4,7 +4,6 @@ import Searchbar from '../components/Searchbar'
 import TitleCommentComponent from '../components/TitleCommentComponent'
 import LocationComponent from '../components/LocationComponent'
 import MapComponent from '../components/MapComponent'
-import LostToggler from '../components/LostToggler'
 import LoadingComponent from '../components/LoadingComponent'
 import DefaultForm from '../components/DefaultForm'
 import FileUploadComponent from '../components/FileUploadComponent'
@@ -14,18 +13,9 @@ import { useNavigate } from 'react-router-dom'
 import { UserDataContext } from '../context/UserDataContext'
 import { AuthContext } from '../context/AuthContext'
 import { ItemDataContext } from '../context/ItemDataContext'
-import {
-	setDoc,
-	doc,
-	serverTimestamp,
-} from 'firebase/firestore'
-import Modal from '../components/Modal'
-
-import { storage, db } from '../firebase'
-import { uploadImg } from '../functions/uploadImg'
+import { serverTimestamp } from 'firebase/firestore'
 // import { deleteImg } from '../functions/deleteImg'
 import { getUserLocationData } from '../functions/getUserLocationData'
-import { uploadDocument } from '../functions/uploadDocument'
 import useUploadDocument from '../customHooks/useUploadDocument'
 
 function AddUI() {
@@ -47,7 +37,7 @@ function AddUI() {
 	const [fileRef, setFileRef] = useState(`items/${itemId}`)
 	const [isLoading, setIsLoading] = useState(false)
 	const [modal, setModal] = useState({error: false, message: ''})
-	const {color, type, radius, date} = useContext(ItemDataContext)
+	const {color, setColor, setType, setRadius, type, radius, date} = useContext(ItemDataContext)
 
 	const {url, loading, error, deleteImg} = useUploadImg(file, `items/${itemId}`)
 	const {docUploadLoading, docUploadEror, uploadDocument} = useUploadDocument()
@@ -64,6 +54,13 @@ function AddUI() {
 		allFilled = true
 	} else { allFilled = false }
 
+	const clearCriteria = () => {
+		setColor('Color')
+		setType('Type')
+		setTitle('')
+		setComment('')
+		setRadius(50)
+	}
 
 
 	const addItem = (e) => {
@@ -79,7 +76,7 @@ function AddUI() {
 			comment,
 			imgUrl,
 			placeData,
-			addedByUser: nanoid(),
+			addedByUser: userData?.userId,
 			date: Date.parse(date),
 			uploadTime: serverTimestamp(),
 		}
@@ -87,7 +84,7 @@ function AddUI() {
 		if (allFilled) {
 			e.preventDefault()
 			console.log("New item: ", obj, itemId)
-			uploadDocument('items', itemId, obj)
+			uploadDocument('items', itemId, obj).then(() => clearCriteria())
 			navigate('/')
 		}
 	}
@@ -122,7 +119,6 @@ function AddUI() {
 			<form className='form-container'>
 				<h1>Add item</h1>
 				<TitleCommentComponent title={title} setTitle={setTitle} comment={comment} setComment={setComment} />
-				<LostToggler />
 				<DefaultForm />				
 				<LocationComponent coordinates={coordinates} placeData={placeData} />
 				<FileUploadComponent file={file} setFile={setFile} imgUrl={imgUrl} handleDeleteImg={handleDeleteImg}/>
@@ -131,12 +127,14 @@ function AddUI() {
 					Add item
 				</button>
 			</form>
+			<div className='col'>
 			<Searchbar
 				setCoordinates={setCoordinates}
 				setPlaceData={setPlaceData}
 				getCurrentLocation={fetchLocationData}
 			/>
 			<MapComponent coordinates={coordinates} setCoordinates={setCoordinates} setPlaceData={setPlaceData}/>
+			</div>
 		</div>
 	</>
 	)

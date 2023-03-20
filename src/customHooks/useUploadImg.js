@@ -2,7 +2,7 @@ import { ref, uploadBytes, getDownloadURL, deleteObject } from 'firebase/storage
 import { storage } from '../firebase'
 import React, {useState, useEffect} from 'react'
 
-const useUploadImg = (file, filePath) => {
+const useUploadImg = (file, filePath,) => {
 	const [url, setUrl] = React.useState(null)
 	const [loading, setLoading] = React.useState(false)
 	const [error, setError] = React.useState(null)
